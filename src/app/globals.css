@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  opacity: 0;
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Swiper Customization */
+.swiper-slide {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.swiper-slide-active {
+  opacity: 1;
+}
+
+/* Form Styles */
+.form-input:focus {
+  @apply ring-2 ring-blue-500 ring-opacity-50 border-blue-500;
+}
+
+/* Button Hover Effects */
+.btn-primary {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.btn-primary:hover {
+  @apply transform -translate-y-0.5 shadow-lg;
+}
+
+/* Card Hover Effects */
+.feature-card {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.feature-card:hover {
+  @apply transform -translate-y-1 shadow-xl;
+}
+
+/* Image Hover Effects */
+.image-zoom {
+  @apply overflow-hidden;
+}
+
+.image-zoom img {
+  @apply transition-transform duration-300 ease-in-out;
+}
+
+.image-zoom:hover img {
+  @apply transform scale-105;
+}
+
+/* Navigation Scroll Effect */
+.nav-scrolled {
+  @apply bg-white/95 backdrop-blur-sm shadow-md;
+}
+
+/* Mobile Menu Animation */
+.mobile-menu {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Success/Error Message Animation */
+.message {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Loading Spinner Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Partner Logo Styles */
+.partner-logo {
+  @apply grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100;
+}
+
+/* Section Spacing */
+section {
+  @apply py-16 md:py-24;
+}
+
+/* Container Max Width */
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Typography Styles */
+h1, h2, h3, h4, h5, h6 {
+  @apply tracking-tight;
+}
+
+/* Link Hover Effects */
+.hover-link {
+  @apply transition-colors duration-300 ease-in-out;
+}
+
+.hover-link:hover {
+  @apply text-blue-600;
+}
