@@ -34,42 +34,42 @@ export const config = {
   },
 }
 
-// Updated features with better images
+// Updated features with better-suited images
 export const features = [
   {
     id: 1,
     title: 'Direct CEO Access',
     description: 'Connect directly with successful CEOs who have built and scaled companies.',
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=2000&q=80',
   },
   {
     id: 2,
     title: 'Pay Per Call',
     description: 'No subscriptions or long-term commitments. Pay only for the calls you need.',
-    image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1601933973783-43cf8a7d4c5f?auto=format&fit=crop&w=2000&q=80',
   },
   {
     id: 3,
     title: 'Verified Experts',
     description: 'All CEOs are thoroughly vetted to ensure you get the best advice.',
-    image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=2000&q=80',
   }
 ]
 
-// Updated howItWorks with better images and correct grid structure
+// Updated howItWorks section
 export const howItWorks = {
   row1: {
     wide: {
       id: 1,
       title: 'Browse Expert CEOs',
-      description: 'Explore profiles of successful CEOs and their expertise areas. Find the perfect match for your business needs and growth objectives.',
-      image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80',
+      description: 'Explore profiles of successful CEOs and their expertise areas. Find the perfect match for your business needs.',
+      image: 'https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&w=2000&q=80',
     },
     thin: {
       id: 2,
       title: 'Book Your Call',
       description: 'Select a time slot and make a secure payment.',
-      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=2000&q=80',
     }
   },
   row2: [
@@ -77,19 +77,19 @@ export const howItWorks = {
       id: 3,
       title: 'Prepare',
       description: 'Get a detailed agenda and preparation guide for your call.',
-      image: 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2000&q=80',
     },
     {
       id: 4,
       title: 'Connect',
       description: 'Join your video call and get transformative insights.',
-      image: 'https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&w=2000&q=80',
     },
     {
       id: 5,
       title: 'Implement',
       description: 'Get an action plan and follow-up resources.',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2000&q=80',
     }
   ]
 }
