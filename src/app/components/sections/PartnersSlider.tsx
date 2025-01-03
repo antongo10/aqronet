@@ -1,126 +1,90 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef } from 'react'
+import { useRef, useEffect } from 'react'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { partners } from '@/config'
 
 export default function PartnersSlider() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const row1Ref = useRef<HTMLDivElement>(null)
-  const row2Ref = useRef<HTMLDivElement>(null)
-  const animationRef = useRef<number>()
-  const progressRef = useRef(0)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  })
 
-  useEffect(() => {
-    const container = containerRef.current
-    const row1 = row1Ref.current
-    const row2 = row2Ref.current
-    if (!container || !row1 || !row2) return
-
-    const animate = () => {
-      const scrollPosition = window.scrollY
-      const containerTop = container.offsetTop
-      const containerHeight = container.offsetHeight
-      const viewportHeight = window.innerHeight
-
-      // Calculate when the container is in view
-      if (
-        scrollPosition + viewportHeight > containerTop &&
-        scrollPosition < containerTop + containerHeight
-      ) {
-        // Calculate scroll progress (0 to 1)
-        const targetProgress = (scrollPosition + viewportHeight - containerTop) / 
-          (containerHeight + viewportHeight)
-        
-        // Smooth lerp (linear interpolation)
-        progressRef.current += (targetProgress - progressRef.current) * 0.1
-
-        // Calculate maximum scroll distance
-        const maxScroll = (row1.scrollWidth - row1.clientWidth) / 2
-        
-        // Apply horizontal scroll with different speeds for each row
-        row1.style.transform = `translateX(-${progressRef.current * maxScroll}px)`
-        row2.style.transform = `translateX(${progressRef.current * maxScroll * 0.7}px)` // Opposite direction, slower speed
-      }
-
-      animationRef.current = requestAnimationFrame(animate)
-    }
-
-    animationRef.current = requestAnimationFrame(animate)
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
-    }
-  }, [])
-
+  // Create smooth spring animations for the scroll
+  const springConfig = { mass: 0.1, stiffness: 100, damping: 20 }
+  
+  // Transform scrollYProgress to larger values for more noticeable movement
+  const row1Position = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, 1000]),
+    springConfig
+  )
+  
+  const row2Position = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, -1000]),
+    springConfig
+  )
   // Double the partners array for continuous scroll effect
-  const displayPartners = [...partners, ...partners, ...partners]
+  const displayPartners = [...partners, ...partners]
 
   return (
     <div 
-      ref={containerRef} 
-      className="bg-gray-100 py-12 overflow-hidden"
-      style={{ minHeight: '40vh' }} // Ensure enough scroll space
+      ref={containerRef}
+      className="bg-gray-50 py-16 overflow-hidden relative"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h3 className="text-center text-2xl font-semibold text-gray-800 mb-8">
+        <h3 className="text-center text-2xl font-semibold text-gray-800 mb-12">
           Trusted by Leaders From
         </h3>
-        <div className="space-y-12">
-          {/* First Row - Moving Left */}
-          <div 
-            ref={row1Ref}
-            className="flex space-x-12 transition-transform duration-100 ease-out"
-            style={{ 
-              width: 'fit-content',
-              willChange: 'transform'
-            }}
-          >
-            {displayPartners.map((partner, index) => (
-              <div 
-                key={`row1-${partner.id}-${index}`}
-                className="flex-shrink-0 w-40 transform hover:scale-105 transition-transform duration-300"
-              >
-                <div className="relative h-12 w-40">
-                  <Image
-                    src={partner.logo}
-                    alt={partner.name}
-                    fill
-                    className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
 
-          {/* Second Row - Moving Right */}
-          <div 
-            ref={row2Ref}
-            className="flex space-x-12 transition-transform duration-100 ease-out"
-            style={{ 
-              width: 'fit-content',
-              willChange: 'transform'
-            }}
-          >
-            {displayPartners.reverse().map((partner, index) => (
-              <div 
-                key={`row2-${partner.id}-${index}`}
-                className="flex-shrink-0 w-40 transform hover:scale-105 transition-transform duration-300"
-              >
-                <div className="relative h-12 w-40">
-                  <Image
-                    src={partner.logo}
-                    alt={partner.name}
-                    fill
-                    className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* First Row - Moving Right */}
+        <motion.div 
+          className="flex space-x-12 mb-12"
+          style={{
+            x: row1Position
+          }}
+        >
+          {displayPartners.map((partner, index) => (
+            <div 
+              key={`row1-${partner.id}-${index}`}
+              className="flex-shrink-0 w-48 h-24 relative"
+            >
+              <Image
+                src={partner.logo}
+                alt={partner.name}
+                fill
+                className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+              />
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Second Row - Moving Left */}
+        <motion.div 
+          className="flex space-x-12"
+          style={{
+            x: row2Position
+          }}
+        >
+          {displayPartners.reverse().map((partner, index) => (
+            <div 
+              key={`row2-${partner.id}-${index}`}
+              className="flex-shrink-0 w-48 h-24 relative"
+            >
+              <Image
+                src={partner.logo}
+                alt={partner.name}
+                fill
+                className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+              />
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Gradient Overlays */}
+        <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+        <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-gray-50 to-transparent z-10" />
       </div>
     </div>
   )
