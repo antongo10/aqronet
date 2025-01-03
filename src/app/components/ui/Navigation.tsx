@@ -59,7 +59,7 @@ export default function Navigation() {
                 alt="AQROnet Logo"
                 width={1200} // 10x larger
                 height={400} // 10x larger
-                className="h-20 w-auto" // Increased height
+                className="h-80 w-auto" // Increased height
                 priority
               />
             </Link>
